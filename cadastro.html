@@ -173,5 +173,37 @@
       });
     });
   </script>
+  <script type="module">
+  import { supabase } from "./supabase.js";
+
+  const btn = document.getElementById("btnCadastro");
+  const mensagem = document.getElementById("mensagem");
+
+  btn.addEventListener("click", async () => {
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value;
+
+    if (!email || !senha) {
+      mensagem.textContent = "Preencha e-mail e senha.";
+      return;
+    }
+
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: senha
+    });
+
+    if (error) {
+      mensagem.textContent = error.message;
+      return;
+    }
+
+    mensagem.textContent = "Conta criada com sucesso!";
+
+    if (data.session) {
+      window.location.href = "painel.html";
+    }
+  });
+</script>
 </body>
 </html>
