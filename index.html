@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navalha Barbearia | Barbeiro Profissional</title>
+  <meta name="description" content="Barbearia clássica com atendimento moderno. Corte, barba, sobrancelha e combos. Agende seu horário pelo WhatsApp.">
+
+  <!-- Fontes: Fraunces (display, com personalidade) + Manrope (texto, limpa e legível) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== HEADER / NAVBAR ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+
+      <a href="#inicio" class="logo">NAVALHA<span class="logo__mark">.</span></a>
+
+      <!-- Menu de navegação. Vira "off-canvas" no mobile via classe .nav--open (controlada pelo JS) -->
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li><a href="#inicio" class="nav__link">Início</a></li>
+          <li><a href="#sobre" class="nav__link">Sobre</a></li>
+          <li><a href="#servicos" class="nav__link">Serviços</a></li>
+          <li><a href="#galeria" class="nav__link">Galeria</a></li>
+          <li><a href="#contato" class="nav__link">Contato</a></li>
+          <!-- Item de autenticação: alterna Entrar / Minha Conta via js/auth.js -->
+          <li><a href="login.html" class="nav__link" id="navAuthLink">Entrar</a></li>
+          <!-- Item visível somente para admins logados (js/auth.js controla o display) -->
+          <li id="navAdminItem" style="display:none;"><a href="admin.html" class="nav__link">Painel Admin</a></li>
+        </ul>
+        <!-- CTA também aparece dentro do menu mobile -->
+        <a href="agendar.html" class="btn btn--accent nav__cta cut-corner">Agendar Horário</a>
+      </nav>
+
+      <a href="agendar.html" class="btn btn--accent header__cta cut-corner">Agendar Horário</a>
+
+      <!-- Botão hambúrguer: 3 <span> viram um "X" via CSS quando .is-active -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Fundo escurecido atrás do menu mobile aberto -->
+  <div class="nav-backdrop" id="navBackdrop"></div>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio">
+      <div class="hero__overlay"></div>
+      <div class="container hero__content">
+        <p class="eyebrow fade-in">Barbearia clássica · Estilo moderno</p>
+        <h1 class="hero__title fade-in">O Estilo que <span>Você Merece</span></h1>
+        <p class="hero__subtitle fade-in">Cortes precisos, barba bem cuidada e um atendimento à moda antiga — pensado para o homem que não abre mão de se cuidar.</p>
+        <div class="hero__actions fade-in">
+          <a href="#servicos" class="btn btn--accent cut-corner">Ver Serviços</a>
+          <a href="https://wa.me/5532998614155?text=Ol%C3%A1!%20Quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener" class="btn btn--outline cut-corner">Agendar pelo WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SOBRE MIM ===== -->
+    <section class="about" id="sobre">
+      <div class="container about__grid">
+        <div class="about__image fade-in cut-corner-lg">
+          <img src="https://images.unsplash.com/photo-1577632584998-56efd90c5a42?auto=format&fit=crop&w=900&q=80" alt="Retrato do barbeiro em seu ambiente de trabalho" loading="lazy">
+        </div>
+        <div class="about__text fade-in">
+          <p class="eyebrow">Sobre mim</p>
+          <h2 class="section-title">Mais de uma década dedicada à navalha e à tesoura</h2>
+          <p>Comecei nesta profissão ainda jovem, aprendendo o ofício com quem veio antes de mim — e nunca parei de estudar cada técnica, cada tendência, cada detalhe que faz a diferença entre um corte comum e um corte impecável.</p>
+          <p>Hoje, a Navalha é o lugar onde tradição e cuidado pessoal se encontram: um espaço para o cliente relaxar, conversar e sair de cabeça erguida — literalmente.</p>
+          <ul class="about__stats">
+            <li><strong>12+</strong><span>anos de experiência</span></li>
+            <li><strong>3.000+</strong><span>cortes realizados</span></li>
+            <li><strong>4.9</strong><span>avaliação média dos clientes</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVIÇOS E VALORES ===== -->
+    <section class="services" id="servicos">
+      <div class="container">
+        <p class="eyebrow fade-in">Serviços</p>
+        <h2 class="section-title fade-in">Serviços e valores</h2>
+
+        <div class="services__grid">
+          <article class="service-card fade-in cut-corner">
+            <h3 class="service-card__title">Corte</h3>
+            <p class="service-card__desc">Corte na tesoura ou máquina, com acabamento na navalha e finalização completa.</p>
+            <div class="service-card__footer">
+              <span class="service-card__price">R$ 45</span>
+              <span class="service-card__time">≈ 40 min</span>
+            </div>
+          </article>
+
+          <article class="service-card fade-in cut-corner">
+            <h3 class="service-card__title">Barba</h3>
+            <p class="service-card__desc">Toalha quente, navalha e produtos de tratamento para um desenho preciso.</p>
+            <div class="service-card__footer">
+              <span class="service-card__price">R$ 35</span>
+              <span class="service-card__time">≈ 30 min</span>
+            </div>
+          </article>
+
+          <article class="service-card fade-in cut-corner">
+            <h3 class="service-card__title">Sobrancelha</h3>
+            <p class="service-card__desc">Design na navalha ou pinça, respeitando o formato natural do rosto.</p>
+            <div class="service-card__footer">
+              <span class="service-card__price">R$ 20</span>
+              <span class="service-card__time">≈ 15 min</span>
+            </div>
+          </article>
+
+          <article class="service-card service-card--highlight fade-in cut-corner">
+            <h3 class="service-card__title">Combo Completo</h3>
+            <p class="service-card__desc">Corte + barba + sobrancelha. O pacote preferido de quem não abre mão de nada.</p>
+            <div class="service-card__footer">
+              <span class="service-card__price">R$ 85</span>
+              <span class="service-card__time">≈ 1h20</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GALERIA ===== -->
+    <section class="gallery" id="galeria">
+      <div class="container">
+        <p class="eyebrow fade-in">Galeria</p>
+        <h2 class="section-title fade-in">Trabalhos recentes</h2>
+
+        <div class="gallery__grid">
+          <figure class="gallery__item fade-in cut-corner">
+            <img src="https://images.unsplash.com/photo-1682989356229-a244c8903492?auto=format&fit=crop&w=800&q=80" alt="Cliente recebendo um corte de cabelo detalhado" loading="lazy">
+          </figure>
+          <figure class="gallery__item fade-in cut-corner">
+            <img src="https://images.unsplash.com/photo-1686671805337-7d8aa64b965f?auto=format&fit=crop&w=800&q=80" alt="Barbeiro finalizando um corte clássico" loading="lazy">
+          </figure>
+          <figure class="gallery__item fade-in cut-corner">
+            <img src="https://images.unsplash.com/photo-1614438865362-9137f7e3036e?auto=format&fit=crop&w=800&q=80" alt="Cadeira de barbeiro no ambiente da barbearia" loading="lazy">
+          </figure>
+          <figure class="gallery__item fade-in cut-corner">
+            <img src="https://images.unsplash.com/photo-1675599193990-33d71150902b?auto=format&fit=crop&w=800&q=80" alt="Interior da barbearia com parede de tijolinhos" loading="lazy">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTATO E LOCALIZAÇÃO ===== -->
+    <section class="contact" id="contato">
+      <div class="container contact__grid">
+        <div class="contact__info fade-in">
+          <p class="eyebrow">Contato</p>
+          <h2 class="section-title">Venha nos visitar</h2>
+
+          <ul class="contact__list">
+            <li>
+              <span class="contact__label">Endereço</span>
+              <span>Rua das Tesouras, 123 — Centro, Juiz de Fora, MG</span>
+            </li>
+            <li>
+              <span class="contact__label">Horário</span>
+              <span>Ter a Sex: 09h às 20h<br>Sáb: 09h às 18h · Dom e Seg: fechado</span>
+            </li>
+            <li>
+              <span class="contact__label">Telefone</span>
+              <span>(32) 99861-4155</span>
+            </li>
+          </ul>
+
+          <div class="contact__social">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram da Navalha Barbearia">Instagram</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook da Navalha Barbearia">Facebook</a>
+          </div>
+        </div>
+
+        <div class="contact__cta fade-in cut-corner-lg">
+          <h3>Pronto para o próximo corte?</h3>
+          <p>Fale agora mesmo com a gente e garanta seu horário sem complicação.</p>
+          <a href="https://wa.me/5532998614155?text=Ol%C3%A1!%20Quero%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener" class="btn btn--whatsapp cut-corner">Chamar no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#inicio" class="logo footer__logo">NAVALHA<span class="logo__mark">.</span></a>
+
+      <ul class="footer__links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+
+      <p class="footer__copy">&copy; <span id="year"></span> Navalha Barbearia. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- SDK do Supabase + config + autenticação compartilhada (usados em todas as páginas) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>

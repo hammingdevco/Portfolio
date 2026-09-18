@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendar Horário | Navalha Barbearia</title>
+  <meta name="description" content="Escolha o barbeiro, o serviço, a data e o horário para o seu próximo atendimento na Navalha Barbearia.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html#inicio" class="logo">NAVALHA<span class="logo__mark">.</span></a>
+
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li><a href="index.html#inicio" class="nav__link">Início</a></li>
+          <li><a href="index.html#sobre" class="nav__link">Sobre</a></li>
+          <li><a href="index.html#servicos" class="nav__link">Serviços</a></li>
+          <li><a href="index.html#galeria" class="nav__link">Galeria</a></li>
+          <li><a href="index.html#contato" class="nav__link">Contato</a></li>
+          <li><a href="login.html" class="nav__link" id="navAuthLink">Entrar</a></li>
+          <li id="navAdminItem" style="display:none;"><a href="admin.html" class="nav__link">Painel Admin</a></li>
+        </ul>
+        <a href="agendar.html" class="btn btn--accent nav__cta cut-corner">Agendar Horário</a>
+      </nav>
+
+      <a href="agendar.html" class="btn btn--accent header__cta cut-corner">Agendar Horário</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-backdrop" id="navBackdrop"></div>
+
+  <main>
+    <section class="page">
+      <div class="container">
+
+        <div class="page__header">
+          <p class="eyebrow">Agendamento</p>
+          <h1 class="section-title">Agendar horário</h1>
+          <p class="page__lead">Escolha o barbeiro, o serviço, a data e um horário disponível. Você pode acompanhar, cancelar ou remarcar depois na sua área do cliente.</p>
+        </div>
+
+        <div class="steps">
+          <span class="step is-active" data-step="1"><span class="step__num">1</span> Barbeiro</span>
+          <span class="step" data-step="2"><span class="step__num">2</span> Serviço</span>
+          <span class="step" data-step="3"><span class="step__num">3</span> Data</span>
+          <span class="step" data-step="4"><span class="step__num">4</span> Horário</span>
+        </div>
+
+        <div class="form-message form-message--error" id="agendaError"></div>
+        <div class="form-message form-message--success" id="agendaSucesso"></div>
+
+        <form id="agendaForm" novalidate>
+
+          <div class="booking-section">
+            <h2 class="booking-section__title">1. Escolha o barbeiro</h2>
+            <div class="option-grid" id="barberGrid">
+              <p class="loading-text">Carregando barbeiros...</p>
+            </div>
+          </div>
+
+          <div class="booking-section">
+            <h2 class="booking-section__title">2. Escolha o serviço</h2>
+            <div class="option-grid" id="serviceGrid">
+              <p class="loading-text">Carregando serviços...</p>
+            </div>
+          </div>
+
+          <div class="booking-section">
+            <h2 class="booking-section__title">3. Escolha a data</h2>
+            <div class="form-group" style="max-width: 260px;">
+              <input class="form-input" type="date" id="agendaData" name="data" required>
+            </div>
+          </div>
+
+          <div class="booking-section">
+            <h2 class="booking-section__title">4. Escolha o horário</h2>
+            <div class="slot-grid" id="slotGrid">
+              <p class="slot-empty">Selecione barbeiro, serviço e data para ver os horários disponíveis.</p>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn--accent form-submit cut-corner" id="agendaSubmit" disabled>Confirmar agendamento</button>
+        </form>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html#inicio" class="logo footer__logo">NAVALHA<span class="logo__mark">.</span></a>
+      <ul class="footer__links">
+        <li><a href="index.html#inicio">Início</a></li>
+        <li><a href="index.html#sobre">Sobre</a></li>
+        <li><a href="index.html#servicos">Serviços</a></li>
+        <li><a href="index.html#galeria">Galeria</a></li>
+        <li><a href="index.html#contato">Contato</a></li>
+      </ul>
+      <p class="footer__copy">&copy; <span id="year"></span> Navalha Barbearia. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="script.js"></script>
+  <script src="js/agendar.js"></script>
+</body>
+</html>

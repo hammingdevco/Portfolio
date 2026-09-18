@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo | Navalha Barbearia</title>
+  <meta name="description" content="Gerencie agendamentos, barbeiros, serviços e horários da Navalha Barbearia.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html#inicio" class="logo">NAVALHA<span class="logo__mark">.</span></a>
+
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li><a href="index.html#inicio" class="nav__link">Início</a></li>
+          <li><a href="index.html#sobre" class="nav__link">Sobre</a></li>
+          <li><a href="index.html#servicos" class="nav__link">Serviços</a></li>
+          <li><a href="index.html#galeria" class="nav__link">Galeria</a></li>
+          <li><a href="index.html#contato" class="nav__link">Contato</a></li>
+          <li><a href="login.html" class="nav__link" id="navAuthLink">Entrar</a></li>
+          <li id="navAdminItem" style="display:none;"><a href="admin.html" class="nav__link">Painel Admin</a></li>
+        </ul>
+        <a href="agendar.html" class="btn btn--accent nav__cta cut-corner">Agendar Horário</a>
+      </nav>
+
+      <a href="agendar.html" class="btn btn--accent header__cta cut-corner">Agendar Horário</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-backdrop" id="navBackdrop"></div>
+
+  <main>
+    <section class="page">
+      <div class="container">
+
+        <div class="panel-topbar">
+          <div>
+            <p class="eyebrow">Administração</p>
+            <h1 class="section-title" style="margin-bottom:0;">Painel administrativo</h1>
+          </div>
+          <button type="button" class="btn btn--outline cut-corner" id="btnLogoutAdmin">Sair</button>
+        </div>
+
+        <div class="summary-grid" id="summaryGrid">
+          <div class="summary-card"><strong id="sumHoje">–</strong><span>Agendamentos hoje</span></div>
+          <div class="summary-card"><strong id="sumSemana">–</strong><span>Agendamentos na semana</span></div>
+          <div class="summary-card"><strong id="sumBarbeiros">–</strong><span>Barbeiros ativos</span></div>
+          <div class="summary-card"><strong id="sumServicos">–</strong><span>Serviços ativos</span></div>
+        </div>
+
+        <div class="tabs">
+          <button type="button" class="tab-btn is-active" data-tab="Agendamentos">Agendamentos</button>
+          <button type="button" class="tab-btn" data-tab="Barbeiros">Barbeiros</button>
+          <button type="button" class="tab-btn" data-tab="Servicos">Serviços</button>
+          <button type="button" class="tab-btn" data-tab="Horarios">Horários</button>
+        </div>
+
+        <!-- ===== ABA: AGENDAMENTOS ===== -->
+        <div class="tab-panel is-active" id="tabAgendamentos">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Cliente</th>
+                  <th>Barbeiro</th>
+                  <th>Serviço</th>
+                  <th>Data</th>
+                  <th>Horário</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabelaAgendamentos">
+                <tr><td colspan="7" class="loading-text">Carregando agendamentos...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== ABA: BARBEIROS ===== -->
+        <div class="tab-panel" id="tabBarbeiros">
+          <button type="button" class="btn btn--accent cut-corner" id="btnNovoBarbeiro" style="margin-bottom:1.5rem;">+ Novo barbeiro</button>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Nome</th><th>Especialidade</th><th>Status</th><th>Ações</th></tr>
+              </thead>
+              <tbody id="tabelaBarbeiros">
+                <tr><td colspan="4" class="loading-text">Carregando barbeiros...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== ABA: SERVIÇOS ===== -->
+        <div class="tab-panel" id="tabServicos">
+          <button type="button" class="btn btn--accent cut-corner" id="btnNovoServico" style="margin-bottom:1.5rem;">+ Novo serviço</button>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Nome</th><th>Preço</th><th>Duração</th><th>Status</th><th>Ações</th></tr>
+              </thead>
+              <tbody id="tabelaServicos">
+                <tr><td colspan="5" class="loading-text">Carregando serviços...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ===== ABA: HORÁRIOS ===== -->
+        <div class="tab-panel" id="tabHorarios">
+          <p class="page__lead" style="margin-bottom:1.5rem;">Defina os dias e horários em que a barbearia atende. Esses horários controlam quais opções aparecem na tela de agendamento.</p>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Dia</th><th>Aberto</th><th>Abre às</th><th>Fecha às</th><th></th></tr>
+              </thead>
+              <tbody id="tabelaHorarios">
+                <tr><td colspan="5" class="loading-text">Carregando horários...</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="button" class="btn btn--accent cut-corner" id="btnSalvarHorarios" style="margin-top:1.5rem;">Salvar horários</button>
+          <div class="form-message form-message--success" id="horariosSucesso" style="margin-top:1rem;"></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== MODAL: BARBEIRO ===== -->
+  <div class="modal-backdrop" id="modalBarbeiro">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title" id="modalBarbeiroTitulo">Novo barbeiro</h3>
+        <button type="button" class="modal__close" data-fechar-modal="modalBarbeiro" aria-label="Fechar">&times;</button>
+      </div>
+      <div class="form-message form-message--error" id="barbeiroError"></div>
+      <form id="formBarbeiro">
+        <input type="hidden" id="barbeiroId">
+        <div class="form-group">
+          <label class="form-label" for="barbeiroNome">Nome</label>
+          <input class="form-input" type="text" id="barbeiroNome" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="barbeiroEspecialidade">Especialidade</label>
+          <input class="form-input" type="text" id="barbeiroEspecialidade" placeholder="Ex: Cortes clássicos e barba">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="barbeiroAtivo">Status</label>
+          <select class="form-select" id="barbeiroAtivo">
+            <option value="true">Ativo</option>
+            <option value="false">Inativo</option>
+          </select>
+        </div>
+        <div class="modal__actions">
+          <button type="button" class="btn btn--outline cut-corner" data-fechar-modal="modalBarbeiro">Cancelar</button>
+          <button type="submit" class="btn btn--accent cut-corner">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: SERVIÇO ===== -->
+  <div class="modal-backdrop" id="modalServico">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title" id="modalServicoTitulo">Novo serviço</h3>
+        <button type="button" class="modal__close" data-fechar-modal="modalServico" aria-label="Fechar">&times;</button>
+      </div>
+      <div class="form-message form-message--error" id="servicoError"></div>
+      <form id="formServico">
+        <input type="hidden" id="servicoId">
+        <div class="form-group">
+          <label class="form-label" for="servicoNome">Nome</label>
+          <input class="form-input" type="text" id="servicoNome" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="servicoDescricao">Descrição</label>
+          <input class="form-input" type="text" id="servicoDescricao">
+        </div>
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label class="form-label" for="servicoPreco">Preço (R$)</label>
+            <input class="form-input" type="number" min="0" step="0.01" id="servicoPreco" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="servicoDuracao">Duração (min)</label>
+            <input class="form-input" type="number" min="5" step="5" id="servicoDuracao" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="servicoAtivo">Status</label>
+          <select class="form-select" id="servicoAtivo">
+            <option value="true">Ativo</option>
+            <option value="false">Inativo</option>
+          </select>
+        </div>
+        <div class="modal__actions">
+          <button type="button" class="btn btn--outline cut-corner" data-fechar-modal="modalServico">Cancelar</button>
+          <button type="submit" class="btn btn--accent cut-corner">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html#inicio" class="logo footer__logo">NAVALHA<span class="logo__mark">.</span></a>
+      <ul class="footer__links">
+        <li><a href="index.html#inicio">Início</a></li>
+        <li><a href="index.html#sobre">Sobre</a></li>
+        <li><a href="index.html#servicos">Serviços</a></li>
+        <li><a href="index.html#galeria">Galeria</a></li>
+        <li><a href="index.html#contato">Contato</a></li>
+      </ul>
+      <p class="footer__copy">&copy; <span id="year"></span> Navalha Barbearia. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="script.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

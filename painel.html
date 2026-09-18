@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Conta | Navalha Barbearia</title>
+  <meta name="description" content="Acompanhe, cancele ou remarque seus agendamentos na Navalha Barbearia.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html#inicio" class="logo">NAVALHA<span class="logo__mark">.</span></a>
+
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li><a href="index.html#inicio" class="nav__link">Início</a></li>
+          <li><a href="index.html#sobre" class="nav__link">Sobre</a></li>
+          <li><a href="index.html#servicos" class="nav__link">Serviços</a></li>
+          <li><a href="index.html#galeria" class="nav__link">Galeria</a></li>
+          <li><a href="index.html#contato" class="nav__link">Contato</a></li>
+          <li><a href="login.html" class="nav__link" id="navAuthLink">Entrar</a></li>
+          <li id="navAdminItem" style="display:none;"><a href="admin.html" class="nav__link">Painel Admin</a></li>
+        </ul>
+        <a href="agendar.html" class="btn btn--accent nav__cta cut-corner">Agendar Horário</a>
+      </nav>
+
+      <a href="agendar.html" class="btn btn--accent header__cta cut-corner">Agendar Horário</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-backdrop" id="navBackdrop"></div>
+
+  <main>
+    <section class="page">
+      <div class="container">
+
+        <div class="panel-topbar">
+          <div>
+            <p class="eyebrow">Área do cliente</p>
+            <h1 class="section-title" style="margin-bottom:0.25rem;">Minha conta</h1>
+            <p class="panel-user">Olá, <strong id="panelNomeUsuario">...</strong></p>
+          </div>
+          <button type="button" class="btn btn--outline cut-corner" id="btnLogout">Sair</button>
+        </div>
+
+        <div class="tabs">
+          <button type="button" class="tab-btn is-active" data-tab="agendamentos">Meus Agendamentos</button>
+          <button type="button" class="tab-btn" data-tab="dados">Meus Dados</button>
+        </div>
+
+        <!-- ===== ABA: MEUS AGENDAMENTOS ===== -->
+        <div class="tab-panel is-active" id="tabAgendamentos">
+          <div class="booking-list" id="listaAgendamentos">
+            <p class="loading-text">Carregando seus agendamentos...</p>
+          </div>
+        </div>
+
+        <!-- ===== ABA: MEUS DADOS ===== -->
+        <div class="tab-panel" id="tabDados">
+          <div class="auth-card" style="max-width:520px;">
+            <h2 class="auth-card__title" style="font-size:1.3rem;">Atualizar meus dados</h2>
+
+            <div class="form-message form-message--error" id="dadosError"></div>
+            <div class="form-message form-message--success" id="dadosSucesso"></div>
+
+            <form id="dadosForm" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="dadosNome">Nome completo</label>
+                <input class="form-input" type="text" id="dadosNome" name="nome" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="dadosTelefone">Telefone / WhatsApp</label>
+                <input class="form-input" type="tel" id="dadosTelefone" name="telefone" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="dadosEmail">E-mail</label>
+                <input class="form-input" type="email" id="dadosEmail" name="email" disabled>
+              </div>
+              <button type="submit" class="btn btn--accent form-submit cut-corner">Salvar alterações</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== MODAL: REAGENDAR ===== -->
+  <div class="modal-backdrop" id="modalReagendar">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 class="modal__title">Reagendar horário</h3>
+        <button type="button" class="modal__close" id="fecharModalReagendar" aria-label="Fechar">&times;</button>
+      </div>
+
+      <div class="form-message form-message--error" id="reagendarError"></div>
+
+      <div class="form-group">
+        <label class="form-label" for="reagendarData">Nova data</label>
+        <input class="form-input" type="date" id="reagendarData">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Novo horário</label>
+        <div class="slot-grid" id="reagendarSlots">
+          <p class="slot-empty">Escolha uma data.</p>
+        </div>
+      </div>
+
+      <div class="modal__actions">
+        <button type="button" class="btn btn--outline cut-corner" id="cancelarReagendar">Cancelar</button>
+        <button type="button" class="btn btn--accent cut-corner" id="confirmarReagendar" disabled>Confirmar nova data</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html#inicio" class="logo footer__logo">NAVALHA<span class="logo__mark">.</span></a>
+      <ul class="footer__links">
+        <li><a href="index.html#inicio">Início</a></li>
+        <li><a href="index.html#sobre">Sobre</a></li>
+        <li><a href="index.html#servicos">Serviços</a></li>
+        <li><a href="index.html#galeria">Galeria</a></li>
+        <li><a href="index.html#contato">Contato</a></li>
+      </ul>
+      <p class="footer__copy">&copy; <span id="year"></span> Navalha Barbearia. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="script.js"></script>
+  <script src="js/painel.js"></script>
+</body>
+</html>

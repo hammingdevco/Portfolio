@@ -1,0 +1,750 @@
+/* =========================================================
+   NAVALHA BARBEARIA — style.css
+   Sistema de design:
+   - Paleta: preto quente + dourado antigo + cobre
+   - Tipografia: Fraunces (display) + Manrope (texto)
+   - Assinatura visual: "corte de navalha" — um canto sempre
+     cortado em diagonal (clip-path) em vez de bordas
+     arredondadas. Aparece em botões, cards, imagens e no
+     sublinhado dos títulos de seção.
+   ========================================================= */
+
+/* ---------- RESET BÁSICO ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* ---------- TOKENS (variáveis de design) ---------- */
+:root {
+  /* Cores */
+  --ink: #0d0c0b;           /* fundo principal, preto quente */
+  --ink-soft: #17140f;      /* superfícies (cards, header) */
+  --ink-line: #2c271e;      /* bordas/hairlines sobre o fundo escuro */
+  --bone: #f3ede3;          /* texto principal, branco quente */
+  --bone-muted: #a89e8e;    /* texto secundário */
+  --gold: #c8a15a;          /* dourado antigo — acento primário */
+  --gold-soft: rgba(200, 161, 90, 0.14);
+  --copper: #a85f3d;        /* cobre — acento de hover/WhatsApp */
+
+  /* Tipografia */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Layout */
+  --container-w: 1160px;
+  --gap: clamp(1.5rem, 4vw, 3rem);
+
+  /* Assinatura: tamanho do "corte" diagonal */
+  --cut: 14px;
+  --cut-lg: 34px;
+
+  /* Movimento */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- BASE ---------- */
+body {
+  background-color: var(--ink);
+  color: var(--bone);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-w);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Foco visível para acessibilidade de teclado */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Respeita usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- ASSINATURA: canto cortado em diagonal ---------- */
+.cut-corner {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--cut)),
+    calc(100% - var(--cut)) 100%,
+    0 100%
+  );
+}
+
+.cut-corner-lg {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--cut-lg)),
+    calc(100% - var(--cut-lg)) 100%,
+    0 100%
+  );
+}
+
+/* ---------- TIPOGRAFIA COMPARTILHADA ---------- */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  color: var(--bone);
+  margin-bottom: 2.5rem;
+  position: relative;
+  padding-bottom: 1.1rem;
+  max-width: 34ch;
+}
+
+/* Traço diagonal sob o título — reforça a assinatura do "corte" */
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 64px;
+  height: 3px;
+  background: linear-gradient(100deg, var(--gold), var(--copper));
+}
+
+/* ---------- BOTÕES ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.75rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  transition: transform 0.25s var(--ease), background-color 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+
+.btn--accent {
+  background-color: var(--gold);
+  color: var(--ink);
+}
+
+.btn--accent:hover {
+  background-color: #dcb772;
+  transform: translateY(-2px);
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: var(--bone);
+  border: 1px solid rgba(243, 237, 227, 0.35);
+}
+
+.btn--outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.btn--whatsapp {
+  background-color: var(--copper);
+  color: var(--bone);
+  width: 100%;
+  padding: 1.1rem 1.75rem;
+  font-size: 1.05rem;
+}
+
+.btn--whatsapp:hover {
+  background-color: #c17347;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   HEADER / NAVBAR
+   ============================================================ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding-block: 1.1rem;
+  transition: background-color 0.35s var(--ease), padding 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+/* Estado "rolado": header ganha fundo sólido (classe adicionada via JS) */
+.header--scrolled {
+  background-color: rgba(13, 12, 11, 0.92);
+  backdrop-filter: blur(8px);
+  padding-block: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  color: var(--bone);
+}
+
+.logo__mark {
+  color: var(--gold);
+}
+
+/* Menu de navegação — escondido fora da tela no mobile */
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(78vw, 320px);
+  background-color: var(--ink-soft);
+  border-left: 1px solid var(--ink-line);
+  padding: 6rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease);
+  z-index: 110;
+}
+
+.nav--open {
+  transform: translateX(0);
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.nav__link {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--bone);
+  position: relative;
+}
+
+.nav__link:hover {
+  color: var(--gold);
+}
+
+.nav__cta {
+  display: inline-flex;
+}
+
+.header__cta {
+  display: none;
+}
+
+/* Fundo escurecido atrás do menu mobile aberto */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+  z-index: 105;
+}
+
+.nav-backdrop.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Botão hambúrguer */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  z-index: 120;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--bone);
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+/* Anima os 3 traços para formar um "X" quando o menu está aberto */
+.hamburger.is-active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.is-active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.is-active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  background-image: url("https://images.unsplash.com/photo-1675599193990-33d71150902b?auto=format&fit=crop&w=1800&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(13, 12, 11, 0.75) 0%, rgba(13, 12, 11, 0.55) 45%, rgba(13, 12, 11, 0.95) 100%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  padding-top: 5rem;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  line-height: 1.08;
+  max-width: 14ch;
+}
+
+.hero__title span {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.hero__subtitle {
+  margin-top: 1.5rem;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: var(--bone-muted);
+  max-width: 46ch;
+}
+
+.hero__actions {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ============================================================
+   FADE-IN AO ROLAR (classe .is-visible adicionada via JS/IntersectionObserver)
+   ============================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   SOBRE MIM
+   ============================================================ */
+.about {
+  padding-block: clamp(4rem, 10vw, 7rem);
+}
+
+.about__grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.about__image {
+  overflow: hidden;
+  border: 1px solid var(--ink-line);
+}
+
+.about__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 5;
+}
+
+.about__text p {
+  color: var(--bone-muted);
+  margin-bottom: 1.1rem;
+  max-width: 52ch;
+}
+
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--ink-line);
+  padding-top: 1.75rem;
+}
+
+.about__stats strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--gold);
+}
+
+.about__stats span {
+  font-size: 0.8rem;
+  color: var(--bone-muted);
+}
+
+/* ============================================================
+   SERVIÇOS
+   ============================================================ */
+.services {
+  padding-block: clamp(4rem, 10vw, 7rem);
+  background-color: var(--ink-soft);
+  border-top: 1px solid var(--ink-line);
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.services__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+.service-card {
+  background-color: var(--ink);
+  border: 1px solid var(--ink-line);
+  padding: 2rem 1.75rem;
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+}
+
+.service-card--highlight {
+  background-color: var(--gold-soft);
+  border-color: var(--gold);
+}
+
+.service-card__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.service-card__desc {
+  color: var(--bone-muted);
+  font-size: 0.92rem;
+  min-height: 3.5em;
+}
+
+.service-card__footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ink-line);
+}
+
+.service-card__price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+.service-card__time {
+  font-size: 0.78rem;
+  color: var(--bone-muted);
+}
+
+/* ============================================================
+   GALERIA
+   ============================================================ */
+.gallery {
+  padding-block: clamp(4rem, 10vw, 7rem);
+}
+
+.gallery__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gallery__item {
+  overflow: hidden;
+  border: 1px solid var(--ink-line);
+  aspect-ratio: 1 / 1;
+}
+
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease), filter 0.5s var(--ease);
+  filter: grayscale(25%);
+}
+
+.gallery__item:hover img {
+  transform: scale(1.08);
+  filter: grayscale(0%);
+}
+
+/* ============================================================
+   CONTATO E LOCALIZAÇÃO
+   ============================================================ */
+.contact {
+  padding-block: clamp(4rem, 10vw, 7rem);
+  background-color: var(--ink-soft);
+  border-top: 1px solid var(--ink-line);
+}
+
+.contact__grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.contact__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.contact__list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.contact__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.contact__list li span:last-child {
+  color: var(--bone-muted);
+}
+
+.contact__social {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.contact__social a {
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.contact__social a:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.contact__cta {
+  background-color: var(--ink);
+  border: 1px solid var(--ink-line);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.contact__cta h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+}
+
+.contact__cta p {
+  color: var(--bone-muted);
+  margin-bottom: 0.75rem;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  padding-block: 2.5rem;
+  border-top: 1px solid var(--ink-line);
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.footer__links a {
+  font-size: 0.85rem;
+  color: var(--bone-muted);
+  transition: color 0.25s var(--ease);
+}
+
+.footer__links a:hover {
+  color: var(--gold);
+}
+
+.footer__copy {
+  font-size: 0.78rem;
+  color: var(--bone-muted);
+}
+
+/* ============================================================
+   RESPONSIVO — TABLET (≥ 768px)
+   ============================================================ */
+@media (min-width: 768px) {
+  .about__grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact__grid {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+
+  .footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+/* ============================================================
+   RESPONSIVO — DESKTOP (≥ 1024px)
+   ============================================================ */
+@media (min-width: 1024px) {
+  /* A partir daqui o menu deixa de ser "hambúrguer" e vira barra horizontal */
+  .hamburger {
+    display: none;
+  }
+
+  .nav {
+    position: static;
+    height: auto;
+    width: auto;
+    background: none;
+    border: none;
+    padding: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 2.5rem;
+    transform: none;
+  }
+
+  .nav__list {
+    flex-direction: row;
+    gap: 2.25rem;
+  }
+
+  .nav__link {
+    font-size: 0.95rem;
+  }
+
+  .nav__cta {
+    display: none;
+  }
+
+  .header__cta {
+    display: inline-flex;
+  }
+
+  .nav-backdrop {
+    display: none;
+  }
+
+  .services__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
